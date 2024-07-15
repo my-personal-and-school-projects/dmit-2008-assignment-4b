@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 
-import Box from '@mui/material/Box';
-import CircularProgress from '@mui/material/CircularProgress';
-import Container from '@mui/material/Container';
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
+import Container from "@mui/material/Container";
 
 import AvailableJobList from "@/components/AvailableJobList";
 import NavBar from "@/components/NavBar";
 
 import { getJobs, getSavedJobs } from "@/utils/api/jobs";
+
+import SavedJobsList from "@/components/savedJobs/SavedJobsList";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -25,7 +27,7 @@ export default function Home() {
       setJobs(data);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching jobs:', error);
+      console.error("Error fetching jobs:", error);
     }
   };
 
@@ -34,22 +36,23 @@ export default function Home() {
       const data = await getSavedJobs();
       setSavedJobs(data);
     } catch (error) {
-      console.error('Error fetching saved jobs:', error);
+      console.error("Error fetching saved jobs:", error);
     }
-  }
+  };
 
   if (loading) {
-
-    return  <main>
-      
-      <NavBar />
-      <Container>
-        <Box sx={{ display: 'flex', paddingTop: 4, justifyContent: 'center' }}>
-          <CircularProgress />
-        </Box>
-      </Container>
-      
-    </main>
+    return (
+      <main>
+        <NavBar />
+        <Container>
+          <Box
+            sx={{ display: "flex", paddingTop: 4, justifyContent: "center" }}
+          >
+            <CircularProgress />
+          </Box>
+        </Container>
+      </main>
+    );
   }
 
   return (
