@@ -1,19 +1,19 @@
 import prisma from "@/prisma-backend-tools/localClient";
 
-
 export default async function handler(req, res) {
   // get requests only.
-  if (req.method === 'GET') {
+  if (req.method === "GET") {
     // Process a POST request
     return await getSavedJobs(req, res);
-  } else if (req.method === 'POST') {
+  } else if (req.method === "POST") {
     return await postSavedJob(req, res);
-  } else if (req.method === 'DELETE') {
+  } else if (req.method === "DELETE") {
     return await deleteSavedJob(req, res);
   } else {
-    return res.status(405).json({ error: 'Method not allowed, please use GET' });
+    return res
+      .status(405)
+      .json({ error: "Method not allowed, please use GET" });
   }
-
 }
 
 const postSavedJob = async (req, res) => {
@@ -30,10 +30,10 @@ const postSavedJob = async (req, res) => {
 
     res.status(201).json(savedJob);
   } catch (error) {
-    console.error('Error saving job:', error);
-    res.status(500).json({ error: 'An internal server error occurred' });
+    console.error("Error saving job:", error);
+    res.status(500).json({ error: "An internal server error occurred" });
   }
-}
+};
 
 const getSavedJobs = async (req, res) => {
   try {
@@ -42,10 +42,10 @@ const getSavedJobs = async (req, res) => {
 
     res.json(savedJobs);
   } catch (error) {
-    console.error('Error fetching saved jobs:', error);
-    res.status(500).json({ error: 'An internal server error occurred' });
+    console.error("Error fetching saved jobs:", error);
+    res.status(500).json({ error: "An internal server error occurred" });
   }
-}
+};
 
 const deleteSavedJob = async (req, res) => {
   try {
@@ -61,7 +61,7 @@ const deleteSavedJob = async (req, res) => {
 
     res.json(deletedJob);
   } catch (error) {
-    console.error('Error deleting saved job:', error);
-    res.status(500).json({ error: 'An internal server error occurred' });
+    console.error("Error deleting saved job:", error);
+    res.status(500).json({ error: "An internal server error occurred" });
   }
-}
+};

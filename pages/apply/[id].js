@@ -3,27 +3,32 @@ import { useEffect, useState } from "react";
 import NavBar from "@/components/NavBar";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
-import SavedJobsList from "@/components/savedJobs/SavedJobsList";
 import CircularProgress from "@mui/material/CircularProgress";
-import { getSavedJobsDetails } from "@/utils/api/jobs";
+import { getJob } from "@/utils/api/jobs";
+import ApplyJobDetails from "@/components/apply/ApplyJobDetails";
+import ApplyJobForm from "@/components/apply/ApplyJobForm";
 
-export default function savedJobsList() {
+export default function savedJobsById() {
   const router = useRouter();
+  const { id } = router.query;
+  const [job, setJob] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [savedJobs, setSavedJobs] = useState([]);
 
-  //fetch saved-jobs on load
+  //fetch job on load
   useEffect(() => {
-    fetchSavedJobs();
-  }, []);
+    //Step 4 - use router.isReady
+    if (router.isReady) {
+      fetchJob();
+    }
+  }, [router.isReady, id]);
 
-  const fetchSavedJobs = async () => {
+  const fetchJob = async () => {
     try {
-      const data = await getSavedJobsDetails();
-      setSavedJobs(data);
+      const data = await getJob(id);
+      setJob(data);
       setLoading(false);
     } catch (error) {
-      console.error("Error fetching saved jobs:", error);
+      console.error("Error fetching jobs:", error);
     }
   };
 
@@ -47,7 +52,10 @@ export default function savedJobsList() {
     <main>
       <NavBar />
       <Container>
-        <SavedJobsList savedJobs={savedJobs} />
+        <ApplyJobForm job={job}></ApplyJobForm>
+      </Container>
+      <Container sx={{ marginTop: "1rem" }}>
+        <ApplyJobDetails job={job} />
       </Container>
     </main>
   );
