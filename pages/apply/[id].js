@@ -7,6 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { getJob } from "@/utils/api/jobs";
 import ApplyJobDetails from "@/components/apply/ApplyJobDetails";
 import ApplyJobForm from "@/components/apply/ApplyJobForm";
+import { Grid, Typography } from "@mui/material";
 
 export default function savedJobsById() {
   const router = useRouter();
@@ -37,6 +38,13 @@ export default function savedJobsById() {
     return (
       <main>
         <NavBar />
+        <Grid container spacing={2} style={{ paddingLeft: "2.5rem" }}>
+          <Grid item xs={12}>
+            <Typography variant="h4" sx={{ paddingTop: 2, paddingBottom: 2 }}>
+              Apply for a Job
+            </Typography>
+          </Grid>
+        </Grid>
         <Container>
           <Box
             sx={{ display: "flex", paddingTop: 4, justifyContent: "center" }}
@@ -49,14 +57,22 @@ export default function savedJobsById() {
   }
 
   return (
-    <main>
+    <>
       <NavBar />
-      <Container>
-        <ApplyJobForm job={job}></ApplyJobForm>
-      </Container>
-      <Container sx={{ marginTop: "1rem" }}>
-        <ApplyJobDetails job={job} />
-      </Container>
-    </main>
+      <Grid container spacing={2} style={{ paddingLeft: "2.5rem" }}>
+        <Grid item xs={12}>
+          <Typography variant="h4" sx={{ paddingTop: 2, paddingBottom: 2 }}>
+            Apply for a Job
+          </Typography>
+          <Typography>Enter your details to apply for the job</Typography>
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <ApplyJobForm job={job} />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <ApplyJobDetails job={job} marg />
+        </Grid>
+      </Grid>
+    </>
   );
 }
