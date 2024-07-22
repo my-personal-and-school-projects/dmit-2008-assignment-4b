@@ -9,8 +9,6 @@ import NavBar from "@/components/NavBar";
 
 import { getJobs, getSavedJobs } from "@/utils/api/jobs";
 
-import SavedJobsList from "@/components/savedJobs/SavedJobsList";
-
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [jobs, setJobs] = useState([]);
