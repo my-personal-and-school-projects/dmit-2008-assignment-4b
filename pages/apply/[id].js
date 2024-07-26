@@ -38,7 +38,7 @@ export default function SavedJobsById() {
   //pass handleApplyJobFormSubmit function as a submitCallback for the ApplyJobForm
   const handleApplyJobFormSubmit = async (application) => {
     try {
-      //save the job to th api/applications endpoint
+      //save the job to the api/applications endpoint
       await postApplication(application);
       setSubmittedApp(true);
     } catch (error) {
